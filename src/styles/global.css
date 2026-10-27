@@ -69,7 +69,6 @@ img { display: block; max-width: 100%; height: auto; }
 figure { margin: 28px 0; }
 .figure-link { display: block; border: 1px solid var(--line); }
 figcaption { font-size: 12px; color: var(--muted); line-height: 1.6; margin-top: 8px; }
-.image-hint { display: block; margin-top: 3px; }
 .gallery { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; }
 .gallery figure { margin: 22px 0 0; }
 .toc { position: sticky; top: 30px; align-self: start; font-size: 12px; line-height: 1.6; padding-top: 7px; }
