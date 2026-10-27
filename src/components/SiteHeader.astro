@@ -1,0 +1,31 @@
+---
+import { url } from '../utils/urls';
+const links = [['','Home'],['lab/','Lab'],['projects/','Projects'],['learning/','Learning & Plans']];
+const current = Astro.url.pathname.replace(/\/$/, '');
+---
+<header class="site-header">
+  <a class="brand" href={url('')} aria-label="Stack and Wire home"><span>Stack & Wire</span></a>
+  
+  <button id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false" hidden><span aria-hidden="true" class="theme-icon">◐</span><span id="theme-label">Light mode</span></button>
+  <script is:inline>
+    (() => {
+      const button = document.getElementById('theme-toggle');
+      const label = document.getElementById('theme-label');
+      function sync() {
+        const light = document.documentElement.dataset.theme === 'light';
+        button.setAttribute('aria-pressed', String(light));
+        button.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+        label.textContent = light ? 'Dark mode' : 'Light mode';
+      }
+      button.hidden = false;
+      sync();
+      button.addEventListener('click', () => {
+        const theme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = theme;
+        try { localStorage.setItem('stack-and-wire-theme', theme); } catch {}
+        sync();
+      });
+    })();
+  </script>
+  <nav aria-label="Main navigation">{links.map(([href,label]) => <a href={url(href)} aria-current={current === url(href).replace(/\/$/,'') || (href === 'projects/' && current.startsWith(url('projects/'))) ? 'page' : undefined}>{label}</a>)}</nav>
+</header>

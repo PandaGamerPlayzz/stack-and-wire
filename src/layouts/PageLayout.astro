@@ -1,0 +1,22 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Figure from '../components/Figure.astro';
+import Gallery from '../components/Gallery.astro';
+import { url } from '../utils/urls';
+const { frontmatter, getHeadings } = Astro.props;
+const {title,description,figures = [],gallery = []} = frontmatter;
+const headings = (Astro.props.headings ?? (getHeadings ? getHeadings() : [])).filter(h => h.depth === 2);
+// Omit placeholder canonical URLs until the owner configures a real site.
+const canonical = Astro.site && !Astro.site.hostname.includes('username') ? new URL(Astro.url.pathname, Astro.site) : undefined;
+---
+<!doctype html>
+<html lang="en" data-theme="dark"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width"/><meta name="description" content={description}/><meta name="color-scheme" content="dark light"/><script is:inline>
+  try {
+    const preference = localStorage.getItem('stack-and-wire-theme');
+    document.documentElement.dataset.theme = preference === 'light' ? 'light' : 'dark';
+  } catch {}
+  </script><title>{title === 'Stack & Wire' ? title + ' — A personal lab notebook' : title + ' | Stack & Wire'}</title>{canonical && <link rel="canonical" href={canonical}/>}<link rel="icon" type="image/svg+xml" href={url('favicon.svg')}/></head>
+<body id="top"><a class="skip-link" href="#main">Skip to content</a><div class="site-shell"><SiteHeader/><div class="page-grid"><main id="main"><h1>{title}</h1><p class="lede">{description}</p><article class="prose"><slot/></article>{figures.map(f => <Figure {...f}/>)}{gallery.length > 0 && <section aria-label="Photos and screenshots"><Gallery images={gallery}/></section>}</main>{headings.length > 0 && <aside class="toc" aria-label="On this page"><p>On this page</p><ol>{headings.map(h => <li><a href={'#'+h.slug}>{h.text}</a></li>)}</ol></aside>}</div><SiteFooter/></div></body></html>
+
