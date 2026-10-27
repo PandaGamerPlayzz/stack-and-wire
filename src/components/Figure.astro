@@ -1,6 +1,6 @@
 ---
 import { url } from '../utils/urls';
-interface Props { src: string; alt: string; caption: string; }
-const {src,alt,caption} = Astro.props;
+interface Props { src: string; alt: string; caption: string; width?: number; height?: number; }
+const {src,alt,caption,width = 960,height = 540} = Astro.props;
 ---
-<figure><a class="figure-link" href={url(src)} aria-label={alt + ' — open full-size image'}><img src={url(src)} alt={alt} loading="lazy" width="960" height="540" /></a><figcaption>{caption} <span class="image-hint">Open full size ↗</span></figcaption></figure>
+<figure><a class="figure-link" href={url(src)} aria-label={alt + ' — open full-size image'}><img src={url(src)} alt={alt} loading="lazy" width={width} height={height} /></a><figcaption>{caption} <span class="image-hint">Open full size ↗</span></figcaption></figure>

@@ -3,12 +3,16 @@ layout: ../layouts/PageLayout.astro
 title: "The lab"
 description: "Two Proxmox hosts, a virtualized NAS, and the networking hardware I've collected."
 gallery:
-  - src: assets/placeholders/rack-front-placeholder.svg
-    alt: "Placeholder for a front view of my 42U rack. No actual rack photo is shown."
-    caption: "Photo to add: the servers at the front of the rack."
-  - src: assets/placeholders/rack-rear-placeholder.svg
-    alt: "Placeholder for a rear view of my rack and switches. No actual rack photo is shown."
-    caption: "Photo to add: switching and cabling at the rear of the rack."
+  - src: assets/photos/rack-front.webp
+    alt: "Front of my open 42U rack with a console monitor, keyboard, mouse, and server equipment."
+    caption: "The front of my 42U rack, with the local console and servers."
+    width: 1500
+    height: 2000
+  - src: assets/photos/rack-rear.webp
+    alt: "Rear of the rack showing network switches, a patch panel, and cables running to the servers."
+    caption: "The rear of the rack, with switches, the patch panel, and cabling."
+    width: 1500
+    height: 2000
 ---
 
 My setup lives in a 42U rack, with servers at the front and switches at the back. There's a small console monitor inside, along with a keyboard, mouse, and four-port VGA KVM for local access.
